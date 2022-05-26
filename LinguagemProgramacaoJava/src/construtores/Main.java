@@ -1,5 +1,8 @@
 package construtores;
 
+
+import static construtores.Aluno.*;
+
 public class Main {
     public static void main(String[] args) {
     //dados através do construtor
@@ -10,12 +13,16 @@ public class Main {
         //definindo a situação do aluno
 
         if(mediaAlunoFinal<6){
-            aluno.situacaoAluno=STATUS.REPROVADO;
+            aluno.situacaoAluno= STATUS.REPROVADO;
         }else{
-            aluno.situacaoAluno=STATUS.APROVADO;
+            aluno.situacaoAluno= STATUS.APROVADO;
         }
 
         //imprimindo a situação do aluno
         System.out.println(" A média do aluno é: " + aluno.calcularMediaAluno() + " e o mesmo está "+ aluno.situacaoAluno);
+
+        //Usa enum MATRICULA
+        aluno.situacaMatricula=MATRICULA.PENDENTE;
+        System.out.println("O aluno está:" + aluno.situacaMatricula);
     }
 }

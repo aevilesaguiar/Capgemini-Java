@@ -74,6 +74,104 @@ do que você precisa.
 
 ## Enumerados
 
+São tipos de campos que consistem em um conjunto fixo de constantes (static final), sendo como uma lista de valores 
+pré-definidos. Na linguagem de programação Java, pode ser definido um tipo de enumeração usando a palavra chave enum. 
+Todos os tipos enums implicitamente estendem a classe java.
 Enumeradores são como o switch case, você atribui alguns valores.
+
+
+## Modificadores de Acesso
+
+Os modificadores de acesso são muito importantes pois eles permitem alterar a visibilidade de determinado elemento.
+
+Os modificadores determinam se uma classe pode usar outra, invocando um determinado atributo ou um determinado método.
+Na linguagem java existem dois níveis de modificadores de acesso:
+
+- Nível Superior
+  - aplicado a classes;
+  - são os seguintes modificadores:
+    - public e
+    - default;
+      - sem moficador explícito;
+
+- Nível de membro
+  - aplicados a:
+    - atributos; e
+    - Métodos
+  - São os seguintes modificadores:
+    - private
+    - protected
+    - public
+    - default
+      - sem nodificador explícito
+
+## modificador public
+
+O modificador de acesso public é o menos restritivo de todos. Ele permite que qualquer outra parte da sua aplicação
+tenha acesso ao componente marcado como public.
+
+----------------------------------------------------------------
+ACESSO                     |  MESMO PACOTE | PACOTES DIFERENTES
+----------------------------------------------------------------
+Classes derivadas          |      [ok]    |       [ok]
+----------------------------------------------------------------
+Classes não relacionadas   |      [ok]    |       [ok]
+----------------------------------------------------------------
+
+## modificador protected
+
+Os membros das classes marcados com o modificador de acesso protected serão acessíveis por classes e interfaces dentro 
+do mesmo pacote e por classes derivadas mesmo que estejam em pacotes diferentes. 
+
+----------------------------------------------------------------
+ACESSO                     |  MESMO PACOTE | PACOTES DIFERENTES
+----------------------------------------------------------------
+Classes derivadas          |      [ok]    |       [ok]
+----------------------------------------------------------------
+Classes não relacionadas   |      [ok]    |       [X]
+----------------------------------------------------------------
+
+## modificador private
+
+O modificador de acesso private é o mais restritivo modificador de acesso. Todo membro de uma classe definido 
+com o modificador private só é acessível para a própria classe.
+Não importa a localização dentro de pacotes ou se a classe foi herdada ou não, um membro private só é acesivel
+dentro da mesma classe em que ele foi declarado
+
+
+----------------------------------------------------------------
+ACESSO                     |  MESMO PACOTE | PACOTES DIFERENTES
+----------------------------------------------------------------
+Classes derivadas          |      [X]     |      [X]
+----------------------------------------------------------------
+Classes não relacionadas   |      [X]    |       [X]
+----------------------------------------------------------------
+
+## modificador default
+
+Os membros das classes marcados com o modificador de acesso protected serão acessíveis por classes e interfaces dentro
+do mesmo pacote e por classes derivadas mesmo que estejam em pacotes diferentes.
+
+----------------------------------------------------------------
+ACESSO                     |  MESMO PACOTE | PACOTES DIFERENTES
+----------------------------------------------------------------
+Classes derivadas          |      [v]     |      [X]
+----------------------------------------------------------------
+Classes não relacionadas   |      [v]    |       [X]
+----------------------------------------------------------------
+
+## De uma forma resumida
+
+----------------------------------------------------------------------
+ACESSO     | Classe       |   Pacote   |   SubClasse   | Todos
+----------------------------------------------------------------------
+PUBLIC     |      [v]     |    [v]    |      [v]      |      [v]
+---------------------------------------------------------------------
+PROTECTED  |      [v]     |    [v]    |      [v]      |      [X]
+--------------------------------------------------------------------
+DEFAULT    |      [v]     |    [v]    |      [X]     |      [X]
+-------------------------------------------------------------------
+PRIVATE    |      [v]    |     [X]  |      [X]      |      [X]
+-------------------------------------------------------------------
 
 
