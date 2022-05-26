@@ -175,3 +175,30 @@ PRIVATE    |      [v]    |     [X]  |      [X]      |      [X]
 -------------------------------------------------------------------
 
 
+## Matrizes/Arrays
+
+Arrays são estruturas de dados homogêneas, elas trabalham com um único tipo de dado. Nós temos dois tipos de array
+o unidimensional(vetor) e o bidimensional(matrizes).
+
+- são inseridos em uma variável que referencia um array
+int [] numeros = new int[4];
+int [] numeros2;
+numeros2=new int[10];
+- declarando vários arrays
+int[] numeros3= new int[44], numeros4=new int[23];
+- inicializar valores em um array
+int[] iniciaValores = {12,32,25,6,98};
+- aloca memoria
+meuArray=new int[10];
+
+O for é a estrutura padrão para varrer arrays.
+
+OBS: na declaração de um array, cada elemento recebe um valor padrão, sendo 0(zero) para numeros de tipo primitivo,
+falso (false) para elementos booleanos e nulo(null) para referencias. Mas você pode inicializar o Array com valores 
+que você quiser  ou precisar. 
+
+
+
+
+
+
