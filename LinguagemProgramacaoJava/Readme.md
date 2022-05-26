@@ -270,3 +270,69 @@ Serializable, Cloneable, Iterable<E>, Collection<E>, Deque<E>, List<E> e Queue<E
 A LinkedList do Java, especificamente, implementa uma lista circular duplamente encadeada: cada elemento guarda a 
 posição do próximo e do anterior, formando um círculo, onde o elemento depois do último é o primeiro, e o anterior 
 a este, é aquele.
+
+## Tópicos Avançados
+
+## Classes Wrappers
+
+Classes Wrapper possuem métodos publicos disponíveis na subclasse Object.
+
+Exemplo: O metodo equals(Object) usamos para comparações, enquanto o toString possibilita imprimir o conteúdo de um objeto 
+em formato de texto.
+
+Classes derivadas da subClasse Number possuem vários métodos para devolverem um tipo primitivo, tais como:
+byteValue(), shortValue(), intValue(), longValue(), doubleValue(), floatValue().
+
+Além disso as classes derivadas de Number possuem também o método compareTo(Objeto que faz comparações entre objetos wrapper)
+
+  Uma classe Wrapper é uma classe cujo objeto envolve ou contém tipos de dados primitivos. Quando criamos um objeto 
+para uma classe wrapper, ele contém um campo e neste campo podemos armazenar tipos de dados primitivos. 
+Em outras palavras, podemos envolver um valor primitivo em um objeto de classe wrapper.
+
+-> Necessidade de classes de wrapper
+
+- Eles convertem tipos de dados primitivos em objetos. Objetos são necessários se quisermos modificar os argumentos 
+passados em um método (porque os tipos primitivos são passados por valor).
+- As classes no pacote java.util tratam apenas de objetos e, portanto, as classes wrapper também ajudam neste caso.
+- As estruturas de dados na estrutura Collection, como ArrayList e Vector , armazenam apenas objetos (tipos de referência) 
+e não tipos primitivos.
+- Um objeto é necessário para dar suporte à sincronização em multithreading.
+
+![](C:/Users/FLAVILES/AppData/Local/Temp/print.png)
+
+
+Vantagens de usar Tipos Primitivos
+- Tipos primitivos são bem rápidos, 
+- Consomem pouca memória
+- Permitem operações mais complexas
+- São bastante eficientes em laços e expressões
+
+
+Logo, temos a vantagem de usar os Wrapper quando :
+
+* É necessário inicializar objetos como nulo, ou enviar parâmetros nulos em um método / construtor para indicar o estado 
+ou função. Isto não pode ser feito com as primitivas.
+
+* É necessário utilizar os metodos existentes nas classes Wrapper.
+
+E por que usar o tipo Primitivo?
+
+* Certas implentações, como coleções, utilizar objetos (Wrappers) têm mais sobrecarga do que os seus homólogos primitivos
+ (memória e boxe).
+
+* Se inicializar objetos como null indevidamente  poderá criar um cenário para um NullPointerException.
+
+- Autoboxing: A conversão automática de tipos primitivos para o objeto de suas classes de wrapper correspondentes é conhecida
+como autoboxing. Por exemplo – conversão de int para Integer, long para Long, double para Double etc.
+- 
+- Unboxing: É apenas o processo inverso do autoboxing. A conversão automática de um objeto de uma classe wrapper para 
+seu tipo primitivo correspondente é conhecido como unboxing. Por exemplo – conversão de Integer para int, Long para 
+long, Double para double, etc.
+
+
+
+
+
+- Generics 
+- Anottations
+- Threads
