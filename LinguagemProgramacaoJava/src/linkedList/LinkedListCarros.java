@@ -62,6 +62,12 @@ public class LinkedListCarros {
         //listando o array
         System.out.println(list);
 
+        //limpar o array
+        list.clear();
+        if(list.isEmpty()){
+            System.out.println("LinkedList Vazio");
+        }
+
 
     }
 
