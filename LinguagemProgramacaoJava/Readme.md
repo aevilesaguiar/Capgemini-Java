@@ -3,10 +3,10 @@
 - Aula 01 - Boas Vindas[ok]
 - Aula 02 - Interfaces[ok]
 - Aula 03 - Construtores[ok]
-- Aula 04 - Enumeradores
-- Aula 05 - Modificadores de acesso
-- Aula 06 - Matriz
-- Aula 07 - Cobranças
+- Aula 04 - Enumeradores[ok]
+- Aula 05 - Modificadores de acesso[ok]
+- Aula 06 - Matrizes[ok]
+- Aula 07 - Collections
 - Aula 08 - Tópicos avançados
 - Aula 09 - Genéricos
 - Aula 10 - Anotações
@@ -197,8 +197,76 @@ OBS: na declaração de um array, cada elemento recebe um valor padrão, sendo 0
 falso (false) para elementos booleanos e nulo(null) para referencias. Mas você pode inicializar o Array com valores 
 que você quiser  ou precisar. 
 
+## Collections
+
+A estrutura de coleções Java é um conjunto de classes e interfaces que implementam estruturas de dados de coleção 
+comumente reutilizáveis. Embora referido como uma estrutura, ele funciona como uma biblioteca. A estrutura de coleções
+fornece as duas interfaces que definem várias coleções e classes que as implementam.
+
+Uma coleção (collection) é um objeto que serve para agrupar muitos elementos em uma única unidade, estes elementos 
+precisão ser Objetos, pode ter coleções homogêneas e heterogêneas, normalmente utilizamos coleções heterogêneas de 
+um tipo especifico.
+
+![](C:/Users/FLAVILES/AppData/Local/Temp/java-collection-framework-hierarchy.webp)
+
+## Hierarquia da JCF
+
+Collectin é um framework , a hierarquia podemos ver abaixo:
+
+![](C:/Users/FLAVILES/AppData/Local/Temp/images.jpg)
+
+Todas essas interfaces e classes, provém métodos de inserção, deleção, busca, ordenação, manipulação de elementos.
+Lembrando também que algumas estruturas de dados permitem apenas objetos únicos, por exemplo Sets, enquanto outras 
+estruturas permitem duplicações como ArrayLists. Cada estrutura de dados pode trazer um ganho de produtividade se 
+utilizada corretamente.
+
+É importante salientar que a interface Map também está presente na JCF, mas ela não é “filha” de Collection. É uma 
+interface base fora da hierarquia da Collection.
+
+A Interface Collection É a interface absoluta na hierarquia de coleções. 
+Dela descendem as interfaces Set, Queue (filas) e List (listas) que formam a base das coleções genéricas da linguagem Java.
+
+- Set – define uma coleção que não contém valores duplicados.
+- Queue – define uma coleção que representa uma fila, ou seja, implementa o modelo FIFO (First-In, First-Out)
+- List - define uma coleção ordenada que pode conter elementos duplicados.
+
+ o ArrayList é especializado em trabalhar na parte interna do vetor, e o linkedList é especialista em trabalhar nas
+pontas. Falamos isso por que o Arralist tem uma performance melhor quando trabalhamos no meio.E usamos os mesmo métodos 
+ do arrayList no LinkedList.
+
+## Resumo de Collections
+
+Uma coleção é uma estrutura de dados que permite armazenar vários objetos.
+Em java uma coleção também é um objeto.
+
+As operações que podem ser feitas em collections variam , mas normalmente incluem:
+
+- Adição de elementos;
+- Remoção de elemntos;
+- Acesso aos elementos;
+- Pesquisa de elementos;
+
+## ArrayList
+
+Primeira coisa que precisamos saber: Arraylist não é um Array. ArrayList é uma lista que tem a característica de 
+possibilitar implementar características de um array.
 
 
+**Qual a diferença entre um array e uma List?**
+
+O array é um vetor de objetos ou tipos primitivos, possui tamanho fixo
+informado no momento em que é inicializado, não tem como incluir mais valores, senão estoura o limite.
+
+Um ArrayList é uma implementação da interface List, outra implementação desta interface é o LinkedList. Como o nome
+sugere, são implementações de um tipo de dado conhecido como Lista.
 
 
+## LinkedList
 
+A classe LinkedList é uma implementação da interface List. Esta classe implementa boa parte das operações de uma lista 
+e permite a inserção de qualquer tipo de elemento (incluindo null). Esta classe implementa as seguintes interfaces: 
+Serializable, Cloneable, Iterable<E>, Collection<E>, Deque<E>, List<E> e Queue<E>.
+
+A LinkedList do Java, especificamente, implementa uma lista circular duplamente encadeada: cada elemento guarda a 
+posição do próximo e do anterior, formando um círculo, onde o elemento depois do último é o primeiro, e o anterior 
+a este, é aquele.
