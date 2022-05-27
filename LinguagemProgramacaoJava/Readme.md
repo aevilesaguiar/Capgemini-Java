@@ -389,3 +389,53 @@ A principio usamos o for convencional.
 
 Agora utilizaremos o foreach(para cada) e ele exige que utilizemos classe Wrapper. Então eu crio um objeto baseado
 num tipo primitivo e coloco a minha lista dentro desse objeto.
+
+## Trabalhando com Dados
+
+- Trabalhar com Datas
+
+Classe Calendar:
+
+Essa classe pode produzir os valores de todos os campos de calendário necessários para implementar a formatação de data 
+e hora, para uma determinada língua e estilo de calendário. Por exemplo, japonês, americano, italiano, brasileiro 
+entre outros.
+
+A classe Calendar é a mais usada quando se trata de datas, mas como é uma classe abstrata, não pode ser instanciada, 
+portanto para obter um calendário é necessário usar o método estático getInstance(), apresentado no exemplo da 
+Listagem 2.
+
+
+import java.util.Calendar;
+
+public class Data_Calendar{
+
+	public static void main(String[] args) {
+		Calendar c = Calendar.getInstance();
+		System.out.println("Data e Hora atual: ”+c.getTime());
+	}
+}
+
+Com a classe Calendar também se consegue manipular a data e hora com os métodos que são fornecidos, abaixo seguem os 
+exemplos.
+
+import java.util.Calendar;
+
+public class Testa_Metodo_Get_Calendar{
+
+	public static void main(String[] args) {
+		Calendar c = Calendar.getInstance();
+
+		System.out.println("Data/Hora atual: "+c.getTime());
+		System.out.println("Ano: "+c.get(Calendar.YEAR));
+		System.out.println("Mês: "+c.get(Calendar.MONTH));
+		System.out.println("Dia do Mês: "+c.get(Calendar.DAY_OF_MONTH));
+	}
+}
+
+DateFormat:
+
+Essa classe permite converter informações do tipo String para data do tipo Date, permitindo seguir um formato. 
+Consegue-se trabalhar ao contrário, convertendo um dado do tipo Date para uma String. Por ser uma classe abstrata, 
+não é possível instanciá-la, por isso deve ser usado para método estático getDateInstance(). Sempre quando declarado
+é preciso importar o pacote java.text.
+
