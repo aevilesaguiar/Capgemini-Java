@@ -10,8 +10,8 @@
 - Aula 08 - Tópicos avançados[ok]
 - Aula 09 - Genéricos[ok]
 - Aula 10 - Anottations[ok]
-- Aula 11 - Threads
-- Aula 12 - Laços
+- Aula 11 - Threads[ok]
+- Aula 12 - Laços[ok]
 - Aula 13 - Trabalhando com dados
 - Aula 14 - Persistência de dados
 - Aula 15 - Exceções e controle de erros
