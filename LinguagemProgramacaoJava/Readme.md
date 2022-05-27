@@ -330,9 +330,17 @@ seu tipo primitivo correspondente é conhecido como unboxing. Por exemplo – co
 long, Double para double, etc.
 
 
+## Generics
+
+Generics é uma forma de tipar uma classe e reutilizar esse tipo várias vezes.Isso evita reescrita, e também reduz o 
+uso de cast para fazer conversão de dados com fequencia.
+
+Os genéricos são um recurso de programação genérica que foi incluída na linguagem de programação Java em 2004 na 
+versão J2SE 5.0. Eles foram projetados para estender o sistema de tipos do Java para permitir que "um tipo ou método
+opere em objetos de vários tipos, fornecendo segurança do tipo em tempo de compilação".
+
+##  Anottations
 
 
 
-- Generics 
-- Anottations
 - Threads
