@@ -6,10 +6,10 @@
 - Aula 04 - Enumeradores[ok]
 - Aula 05 - Modificadores de acesso[ok]
 - Aula 06 - Matrizes[ok]
-- Aula 07 - Collections
-- Aula 08 - Tópicos avançados
-- Aula 09 - Genéricos
-- Aula 10 - Anotações
+- Aula 07 - Collections[ok]
+- Aula 08 - Tópicos avançados[ok]
+- Aula 09 - Genéricos[ok]
+- Aula 10 - Anottations[ok]
 - Aula 11 - Fios
 - Aula 12 - Laços
 - Aula 13 - Trabalhando com dados
@@ -339,8 +339,36 @@ Os genéricos são um recurso de programação genérica que foi incluída na li
 versão J2SE 5.0. Eles foram projetados para estender o sistema de tipos do Java para permitir que "um tipo ou método
 opere em objetos de vários tipos, fornecendo segurança do tipo em tempo de compilação".
 
-##  Anottations
+##  Anottations /Metadados
+
+Anottations são anotações que você pode criar dentro do java, com uma semantica específica. Ela começa com @, 
+ex: @Override. Existem vários tipos. A anottation você pode usar em tempo de compilação, em tempo de construção do
+projeto e em tempo de execução do projeto. 
+
+Anottations é um recurso que permite adicionar informações complementares no código fonte.
+
+Formas de uso no Código fonte:
+
+Informações para o compilador
+Em tempo de execução
+O código fonte pode utilizar essas informações para compilar o código-fonte(.class) , no caso de desenvolvimento web(.war)
+
+-@ Override : sobrescrevendo um método
+- Inherited
+- @Deprecated
+- ....
+
+Uso de anottations
+- Documentaçãom por exemplo, XDoclet
+- Compilação
+- IDE
+- Estrutura de teste, por exemplo JUnit(ferramenta de teste unitário)
+- Recipient IoC , por exemplo , como Spring
+- Serialização, por exemplo , XML]
+- Programação Orientada a aspectos (AOP) , por exemplo, Spring AOP
+- Servidores de aplicativos, por exemplo. conteiner EJB, serviço da web;
+- Mapeamento objeto-relacional(ORM) , por exemplo, Hibernate, JPA
+- E muito mais...
 
 
-
-- Threads
+## Threads
