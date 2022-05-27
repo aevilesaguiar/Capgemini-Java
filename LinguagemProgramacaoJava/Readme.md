@@ -380,4 +380,12 @@ tem como determinar quem vai executar antes ou depois, queme scala é o servidor
 podemos ter resultados diferentes, a execução do processamento não é linear, muda conforme o enfileiramento.
 
 
+## Laços de Repetição
 
+Estruturas de repetição, também conhecidas como loops (laços), são utilizadas para executar repetidamente uma instrução
+ou bloco de instrução enquanto determinada condição estiver sendo satisfeita.
+
+A principio usamos o for convencional.
+
+Agora utilizaremos o foreach(para cada) e ele exige que utilizemos classe Wrapper. Então eu crio um objeto baseado
+num tipo primitivo e coloco a minha lista dentro desse objeto.
