@@ -14,8 +14,8 @@
 - Aula 12 - Laços[ok]
 - Aula 13 - Trabalhando com dados[ok]
 - Aula 14 - Persistência de dados[ok]
-- Aula 15 - Exceções e controle de erros
-- Aula 16 - Considerações finais
+- Aula 15 - Exceções e controle de erros[ok]
+- Aula 16 - Considerações finais[ok]
 
 ## Interfaces
 
