@@ -12,8 +12,8 @@
 - Aula 10 - Anottations[ok]
 - Aula 11 - Threads[ok]
 - Aula 12 - Laços[ok]
-- Aula 13 - Trabalhando com dados
-- Aula 14 - Persistência de dados
+- Aula 13 - Trabalhando com dados[ok]
+- Aula 14 - Persistência de dados[ok]
 - Aula 15 - Exceções e controle de erros
 - Aula 16 - Considerações finais
 
@@ -439,3 +439,330 @@ Consegue-se trabalhar ao contrário, convertendo um dado do tipo Date para uma S
 não é possível instanciá-la, por isso deve ser usado para método estático getDateInstance(). Sempre quando declarado
 é preciso importar o pacote java.text.
 
+
+## Persistencia de Dados
+
+A Persistência de dados é um meio para que um aplicativo persista e recupere informações de um sistema de armazenamento
+não volátil. A persistência é vital para os aplicativos corporativos por causa do acesso necessário aos bancos de dados.
+
+O que é persistencia de dados? persistir dados é fazer uma inclusão, exclusão, alteração, seleção no banco de dados
+
+**O que é JDBC?** 
+
+Pode-se dizer que é uma API/biblioteca que reúne conjuntos de classes e interfaces escritas na linguagem Java na qual
+possibilita se conectar através de um driver específico do banco de dados desejado. Com esse driver pode-se executar 
+instruções SQL de qualquer tipo de banco de dados relacional.
+
+Para fazer a comunicação entre a aplicação e o SGBDs é necessário possuir um driver para a conexão desejada. 
+Geralmente, as empresas de SGBDs oferecem o driver de conexão que seguem a especificação JDBC para caso de algum 
+desenvolvedor querer utilizar.
+
+**O que é um Driver?**
+
+Além de atuar como uma interface entre os SGBDs e as aplicações, também pode ser considerado como um tradutor que ajuda
+na definição das mensagens binárias trocadas com um protocolo de um SGBD.
+
+Para desenvolver uma aplicação baseada em uma especificação JDBC é preciso entender algumas das principais classes e 
+interfaces apresentadas abaixo.
+
+Existe um ponto de atenção na importação das classes ou interfaces relacionadas ao pacote a ser usado no momento do 
+desenvolvimento. Na Figura 1, é mostrado de forma correta a importação do pacote referente à classe Connection
+pertencente ao pacote java.sql. Esse é um fator a ser observado com cautela, pois isso é considerado um dos erros
+mais comuns justamente pelo fato do desenvolvedor pensar muitas vezes em usar o pacote com.mysql.jdbc sendo que está 
+utilizando o driver JDBC do banco MySQL.
+
+![](C:/Users/FLAVILES/AppData/Local/Temp/EntendendoJDBC01.jpg)
+
+Pacote java.sql
+
+Esse pacote oferece a biblioteca Java o acesso e processamento de dados em uma fonte de dado. As classes e interfaces 
+mais importantes são:
+
+|-----Classe------   |   Interface  |
+----------------------------------
+|DriverManager | Driver            |
+----------------------------------
+|DriverManager | Connection      |
+----------------------------------
+|DriverManager | Statment        |
+----------------------------------
+|DriverManager | ResultSet       |
+---------------------------------
+|DriverManager| PreparedStament |
+---------------------------------
+
+**A classe DriverManager**
+
+Cada driver que se deseja usar precisa ser registrado nessa classe, pois oferece métodos estáticos para gerenciar 
+um driver JDBC.
+
+Para a aplicação reconhecer a comunicação com o banco de dados escolhido, é preciso obter um arquivo com a extensão .jar
+que geralmente se consegue através dos sites das empresas que distribuem o SGBD. Esse arquivo tem o objetivo ajudar no 
+carregamento do driver JDBC. Na prática de um desenvolvimento voltado a web, é criada a pasta “lib” da pasta “WEB-INF” 
+e inserido esse arquivo.
+
+No caso apresentado na Figura 2, apenas foi criado à pasta “lib” por ser um projeto Java puro e adicionado a biblioteca 
+copiada para dentro do projeto.
+
+![](C:/Users/FLAVILES/AppData/Local/Temp/EntendendoJDBC02.png)
+
+Figura 2: Adicionando a biblioteca MySQL Connector no projeto.
+
+**Listagem 1: Carregando o driver MySQL.**
+
+try {
+//Carrega o driver especificado
+Class.forName("com.mysql.jdbc.Driver");
+} catch (ClassNotFoundException e) {
+System.out.println("Driver não encontrado!"+e);
+}
+
+Após o driver estar inicializado, pode-se abrir uma conexão através do método getConection da classe DriverManager. 
+Esse método possui três sobrecargas apresentado na Listagem 2.
+
+Listagem 2: Sobrecarga do método getConnection.
+
+public static Connection getConnection(String url)
+public static Connection getConnection(String url, Properties info)
+public static Connection getConnection(String url, String user, String password)
+
+**A interface Connection:** Representa uma conexão ao banco de dados. Nessa interface são apresentados os métodos 
+mais utilizados.
+
+**Método close:** Geralmente é inserido dentro do bloco finally para realizar sempre a sua execução, pois esse método serve 
+para fechar e liberar imediatamente um objeto Connection.
+
+**Método isClosed:** Serve para verificar se o objeto Connection está fechado.
+
+**Método createStatement**
+
+É usado para criar um objeto Statement que executa instruções SQL ao banco de dados.
+
+Listagem 3: Método que cria uma conexão com o banco de dados.
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class ConnectionFactory {
+
+	public static Connection createConnection() throws SQLException{
+		String url = "jdbc:mysql://localhost:3306/loja"; //Nome da base de dados
+		String user = "root"; //nome do usuário do MySQL
+		String password = "root"; //senha do MySQL
+
+		Connection conexao = null;
+		conexao = DriverManager.getConnection(url, user, password);
+
+		return conexao;
+	}
+}
+
+**Método prepareStatement**
+
+É usado para criar um objeto que representa a instrução SQL que será executada, sendo que é invocado através do objeto 
+Connetion.
+
+Listagem 4: Exemplo da execução de uma instrução SQL através do prepareStatement
+
+String sql = "INSERT INTO loja (nome,sobrenome,idade,salario) VALUES ('Mario','Corleone','28','2322.39')";
+//Prepara a instrução SQL
+PreparedStatement ps = conexao.prepareStatement(sql);
+//Executa a instrução SQL
+ps.execute();
+
+**setAutoCommit**
+
+Esse método aceita como parâmetro um valor booleano (true ou false), no qual consegue definir se todas as instruções 
+executadas serão gravadas (comitadas). Por padrão, quando finalizada uma instrução de INSERT, UPDATE ou DELETE a 
+operação de gravação (commit) é executada automaticamente sem a necessidade de invocar o método setAutoCommit. Agora, 
+para instruções de SELECT, a gravação dos dados ocorre quando o conjunto de dados associados é fechado, ou seja, quando
+invocado o método close.
+
+**rollback**
+
+Usado para retornar uma transação, sendo muito usado dentro de blocos catch em caso de alguma operação gerar erro.
+
+Listagem 5: Exemplos do método setAutoCommit, rollback e commit.
+
+try {
+conexao.setAutoCommit(false);
+ps = conexao.prepareStatement(sql);
+ps.executeUpdate();
+
+	//Grava as informações se caso de problema os dados não são gravados
+	conexao.commit();
+
+} catch (SQLException e ) {
+if (conexao != null) {
+try {
+System.err.print("Rollback efetuado na transação");
+conexao.rollback();
+} catch(SQLException e2) {
+System.err.print("Erro na transação!"+e2);
+}
+}
+} finally {
+if (ps != null) {
+ps.close();
+}
+conexao.setAutoCommit(true);
+}
+
+
+**A interface Statement**
+
+Nesta interface são listados os métodos executeQuery e executeUpdate que são considerados os mais importantes referente 
+a execução de uma query.
+
+**executeQuery** - Executa uma instrução SQL que retorna um único objeto ResultSet.
+**executeUpdate** - Executa uma instrução SQL referente a um INSERT, UPDATE e DELETE. Esse método retorna a quantidade de 
+registros que são afetados pela execução do comando SQL.
+
+**Listagem 6: Exemplo do método executeUpdate.**
+
+
+String sql = "UPDATE funcionario SET nome=?, sobrenome=? WHERE codigo=?";
+ps = conn.prepareStatement(sql);
+ps.setString(1, nome);
+ps.setString(2, sobrenome);
+ps.setInt(3, codigo);
+//Executa a instrução
+int retorno = ps.executeUpdate();
+if(retorno > 0){
+System.out.printf("Novo registro alterado: %d: %s - %s",codigo, nome,sobrenome);
+}else{
+System.out.println("Não foi possível alterar os registros!");
+}
+
+
+
+**Interface ResultSet**
+
+
+Representa o conjunto de resultados de uma tabela no banco de dados. Esse objeto mantém o cursor apontando para a sua 
+linha atual de dados, sendo que seu início fica posicionado na primeira linha.
+
+Além disso, esse objeto fornece métodos getters referentes aos tipos de dados como: getInt, getString, getDouble, 
+getFloat, getLong entre outros. Com esses métodos são possíveis recuperar valores usando, por exemplo, o nome da coluna 
+ou número do índice.
+
+![](C:/Users/FLAVILES/AppData/Local/Temp/EntendendoJDBC03.jpg)
+
+Figura 3: Visão de como funciona a recuperação de valores através dos índices.
+
+Listagem 7: Exemplo da listagem e recuperação dos valores através do objeto ResultSet.
+
+conn = ConnectionFactory.createConnection();
+
+String sql = "SELECT codigo, nome, sobrenome, idade, salario FROM funcionario";
+ps = conn.prepareStatement(sql);
+
+//Executa o comando de consulta aonde guarda os dados retornados dentro do ResultSet.
+//Pelo fato de gerar uma lista de valores, é necessário percorrer os dados através do laço while
+ResultSet rs = ps.executeQuery();
+//Faz a verificação de enquanto conter registros, percorre e resgata os valores
+while(rs.next()){
+//Recupera valor referente ao nome da coluna
+int codigo = rs.getInt("codigo");
+//Recupera o índice do campo referente ao campo nome
+String nome = rs.getString(2);
+String sobreNome = rs.getString("sobrenome");
+String nomeCompleto = nome.concat(" "+sobreNome);
+int idade = rs.getInt("idade");
+Double salario = rs.getDouble("salario");
+System.out.printf("Código %d: %s - %d | Salário: %f \n",codigo, nomeCompleto, idade, salario);
+}
+
+## DAO(Objeto de acesso a dados)
+
+
+DAO Pattern: Persistência de Dados utilizando o padrão DAO
+
+O padrão de projeto DAO surgiu com a necessidade de separarmos a lógica de negócios da lógica de persistência de dados. 
+Este padrão permite que possamos mudar a forma de persistência sem que isso influencie em nada na lógica de negócio,
+além de tornar nossas classes mais legíveis.
+
+Classes DAO são responsáveis por trocar informações com o SGBD e fornecer operações CRUD e de pesquisas, elas devem ser 
+capazes de buscar dados no banco e transformar esses em objetos ou lista de objetos, fazendo uso de listas genéricas 
+, também deverão receber os objetos, converter em instruções SQL e mandar para o banco de dados.
+
+Toda interação com a base de dados se dará através destas classes, nunca das classes de negócio, muito menos de formulários.
+
+Se aplicarmos este padrão corretamente ele vai abstrair completamente o modo de busca e gravação dos dados, 
+tornando isso transparente para aplicação e facilitando muito na hora de fazermos manutenção na aplicação ou 
+migrarmos de banco de dados.
+
+Também conseguimos centralizar a troca de dados com o SGBD (Sistema Gerenciador de Banco de Dados), teremos um ponto 
+único de acesso a dados, tendo assim nossa aplicação um ótimo design orientado a objeto.
+
+
+
+
+## DBeaver
+
+DBeaver é um aplicativo de software cliente SQL e uma ferramenta de administração de banco de dados. Para bancos de dados
+relacionais, ele usa a interface de programação de aplicativo JDBC para interagir com os bancos de dados por meio de 
+um driver JDBC
+
+## Exceções
+
+Uma exceção é um sinal que indica que algum tipo de condição excepcional ocorreu durante a execução do programa. Assim, exceções estão associadas a condições de erro que não tinham como ser verificadas durante a compilação do programa.
+
+
+
+O tratamento de exceções (exception handling) permite ao programador capturar exceções e tratá-las sem interromper o fluxo normal de execução do programa.
+
+Entendendo as exceções
+
+As exceções ocorrem quando algo imprevisto acontece, elas podem ser provenientes de erros de lógica ou acesso a recursos que talvez não estejam disponíveis.
+
+Alguns possíveis motivos externos para ocorrer uma exceção são:
+
+- Tentar abrir um arquivo que não existe.
+- Tentar fazer consulta a um banco de dados que não está disponível.
+- Tentar escrever algo em um arquivo sobre o qual não se tem permissão de escrita.
+- Tentar conectar em servidor inexistente.
+
+Quando se cria programas de computador em Java, há possibilidade de ocorrer erros imprevistos durante sua execução, esses erros são conhecidos como exceções e podem ser provenientes de erros de lógica ou acesso a dispositivos ou arquivos externos.
+
+Alguns possíveis erros de lógica para ocorrer uma exceção são:
+
+- Tentar manipular um objeto que está com o valor nulo.
+- Dividir um número por zero.
+- Tentar manipular um tipo de dado como se fosse outro.
+- Tentar utilizar um método ou classe não existentes.
+
+
+**Tratando Exceções**
+
+Uma maneira de tentar contornar esses imprevistos é realizar o tratamento dos locais no código que podem vir a lançar possíveis exceções, como por exemplo, campo de consulta a banco de dados, locais em que há divisões, consulta a arquivos de propriedades ou arquivos dentro do próprio computador.
+
+Para tratar as exceções em Java são utilizados os comandos try e catch.
+
+Onde:
+
+- try{ … } - Neste bloco são introduzidas todas as linhas de código que podem vir a lançar uma exceção.
+- catch(tipo_excessao e) { … } - Neste bloco é descrita a ação que ocorrerá quando a exceção for capturada.
+
+Comando finally
+
+Quando uma exceção é lançada e é necessário que determinada ação seja tomada mesmo após a sua captura, utilizamos a palavra reservada finally.
+
+**Comandos throw e throws**
+
+Imagine uma situação em que não é desejado que uma exceção seja tratada na própria classe ou método, mas sim em outro que venha lhe chamar. Para solucionar tal situação utilizamos o comando throws na assinatura do método com a possível exceção que o mesmo poderá a vir lançar.
+
+tipo_retorno nome_metodo() throws tipo_exceção_1, tipo_exceção_2, tipo_exceção_n
+{
+
+…
+
+}
+
+
+Onde:
+
+- tipo_retorno – Tipo de retorno do método.
+- nome_metodo() - Nome do método que será utilizado.
+- tipo_exceção_1 a tipo_exceção_n – Tipo de exceções separadas por virgula que o seu método pode vir a lançar.
