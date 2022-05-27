@@ -10,7 +10,7 @@
 - Aula 08 - Tópicos avançados[ok]
 - Aula 09 - Genéricos[ok]
 - Aula 10 - Anottations[ok]
-- Aula 11 - Fios
+- Aula 11 - Threads
 - Aula 12 - Laços
 - Aula 13 - Trabalhando com dados
 - Aula 14 - Persistência de dados
@@ -372,3 +372,12 @@ Uso de anottations
 
 
 ## Threads
+
+Threads são conjuntos de instruções que podem ser executados dentro dos processos.
+O processos são contituídos de threads. Esse conceito permite que threads sejam executadas de forma paralela.
+Porém é importante salientar que o programador não tem controle sobre a sequencia de execução dos processos, então não
+tem como determinar quem vai executar antes ou depois, queme scala é o servidor com seus critérios. e em uma mesma máquina
+podemos ter resultados diferentes, a execução do processamento não é linear, muda conforme o enfileiramento.
+
+
+
